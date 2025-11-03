@@ -22,6 +22,8 @@ public class LottoController {
     public void run() {
         PurchaseAmount purchaseAmount = askAmount();
         List<Lotto> lottos = lottoGenerator.issueLottos(purchaseAmount.getCount());
+        outputView.printLottos(lottos);
+
 
 
     }

@@ -18,5 +18,4 @@ public class LottoNumber {
             throw new IllegalArgumentException(ErrorCode.INVALID_LOTTO_RANGE.getMessage());
         }
     }
-
 }
