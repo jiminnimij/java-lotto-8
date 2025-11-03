@@ -12,10 +12,6 @@ public class PurchaseAmount {
         this.amount = amount;
     }
 
-    public int getCount() {
-        return amount / PRICE;
-    }
-
     private void validate(int amount) {
         validatePositiveInteger(amount);
         validateMultipleOfThousand(amount);
@@ -32,4 +28,13 @@ public class PurchaseAmount {
             throw new IllegalArgumentException(ErrorCode.INVALID_AMOUNT.getMessage());
         }
     }
+
+    public int getCount() {
+        return amount / PRICE;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
 }

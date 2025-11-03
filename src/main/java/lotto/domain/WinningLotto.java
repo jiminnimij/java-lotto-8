@@ -12,6 +12,17 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
+    public Rank judge(Lotto lotto) {
+        long matchCount = winningLotto.getNumbers().stream()
+                .map(LottoNumber::getNumber)
+                .filter(lotto::contains)
+                .count();
+
+        boolean bonusMatch = lotto.contains(bonusNumber.getNumber());
+
+        return Rank.of(matchCount, bonusMatch);
+    }
+
     private void validateBonusNumber(Lotto winningLotto, LottoNumber bonusNumber) {
         if (winningLotto.contains(bonusNumber.getNumber())) {
             throw new IllegalArgumentException(ErrorCode.DUPLICATE_BONUS.getMessage());
