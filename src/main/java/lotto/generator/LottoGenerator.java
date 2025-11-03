@@ -3,17 +3,14 @@ package lotto.generator;
 import camp.nextstep.edu.missionutils.Randoms;
 import lotto.domain.Lotto;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class LottoGenerator {
     public List<Lotto> issueLottos(int count) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lottos.add(issueLottoNumber());
-        }
-
-        return lottos;
+        return IntStream.range(0, count)
+                .mapToObj(i -> issueLottoNumber())
+                .toList();
     }
 
     private Lotto issueLottoNumber() {
