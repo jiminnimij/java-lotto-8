@@ -5,9 +5,13 @@ import lotto.exception.ErrorCode;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class InputView {
     private static final String DELIMITER = ",";
+
+
 
     public int readPurchaseAmount() {
         String input = Console.readLine();
@@ -28,6 +32,13 @@ public class InputView {
         validateInput(input);
 
         return parseInteger(input);
+    }
+
+    public <T> T readWithRetry(Supplier<T> reader, Consumer<String> onError) {
+        while (true) {
+            try { return reader.get(); }
+            catch (IllegalArgumentException e) { onError.accept(e.getMessage()); }
+        }
     }
 
     private List<Integer> splitNumbers(String input) {

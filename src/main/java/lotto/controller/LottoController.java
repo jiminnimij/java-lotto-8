@@ -32,15 +32,8 @@ public class LottoController {
 
     private PurchaseAmount askAmount() {
         outputView.promptAmount();
-        while (true) {
-            try {
-                int amount = inputView.readPurchaseAmount();
-                return new PurchaseAmount(amount);
-
-            } catch (IllegalArgumentException e) {
-                outputView.printError(e.getMessage());
-            }
-        }
+        int amount = inputView.readWithRetry(inputView::readPurchaseAmount, outputView::printError);
+        return new PurchaseAmount(amount);
     }
 
     private WinningLotto askWinningLotto() {
@@ -52,28 +45,14 @@ public class LottoController {
 
     private Lotto askWinningNumbers() {
         outputView.promptWinningNumbers();
-        while (true) {
-            try {
-                List<Integer> winningNumbers = inputView.readWinningNumbers();
-                return new Lotto(winningNumbers);
-
-            } catch (IllegalArgumentException e) {
-                outputView.printError(e.getMessage());
-            }
-        }
+        List<Integer> winningNumbers = inputView.readWithRetry(inputView::readWinningNumbers, outputView::printError);
+        return new Lotto(winningNumbers);
     }
 
     private LottoNumber askBonusNumber() {
         outputView.promptBonusNumber();
-        while (true) {
-            try {
-                int bonusNumber = inputView.readBonusNumber();
-                return new LottoNumber(bonusNumber);
-
-            } catch (IllegalArgumentException e) {
-                outputView.printError(e.getMessage());
-            }
-        }
+        int bonusNumber = inputView.readWithRetry(inputView::readBonusNumber, outputView::printError);
+        return new LottoNumber(bonusNumber);
     }
 
     private LottoResult calculateResults(PurchaseAmount purchaseAmount, List<Lotto> lottos, WinningLotto winningLotto) {
