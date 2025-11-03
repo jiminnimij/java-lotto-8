@@ -4,6 +4,8 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
 import lotto.domain.Rank;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class OutputView {
@@ -35,10 +37,10 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        for (Rank rank : Rank.values()) {
-            if (rank == Rank.MISS) continue;
-            System.out.println(formatRankLine(rank, lottoResult.countByRank(rank)));
-        }
+        Arrays.stream(Rank.values())
+                .filter(rank -> rank != Rank.MISS)
+                .sorted(Comparator.comparingInt(Rank::getPrize))
+                .forEach(rank -> System.out.println(formatRankLine(rank, lottoResult.countByRank(rank))));
 
         System.out.println("총 수익률은 " + String.format("%.1f", lottoResult.getProfitRate()) + "%입니다.");
     }
