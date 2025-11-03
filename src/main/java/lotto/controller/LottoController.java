@@ -5,9 +5,7 @@ import lotto.generator.LottoGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class LottoController {
     private final InputView inputView;

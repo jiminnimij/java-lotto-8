@@ -18,8 +18,6 @@ public enum Rank {
         this.prize = prize;
     }
 
-
-
     public static Rank of(long matchCount, boolean bonusMatched) {
         if (matchCount == 6) return FIRST;
         if (matchCount == 5 && bonusMatched) return SECOND;
