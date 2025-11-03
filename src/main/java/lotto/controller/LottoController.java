@@ -26,7 +26,7 @@ public class LottoController {
         outputView.printLottos(lottos);
         WinningLotto winningLotto = askWinningLotto();
 
-        LottoResult lottoResult = calculateResults(purchaseAmount, lottos, winningLotto);
+        LottoResult lottoResult = LottoResult.of(lottos, winningLotto, purchaseAmount);
         outputView.printResults(lottoResult);
     }
 
@@ -55,13 +55,4 @@ public class LottoController {
         return new LottoNumber(bonusNumber);
     }
 
-    private LottoResult calculateResults(PurchaseAmount purchaseAmount, List<Lotto> lottos, WinningLotto winningLotto) {
-        Map<Lotto, Rank> resultMap = new HashMap<>();
-        for (Lotto lotto : lottos) {
-            Rank rank = winningLotto.judge(lotto);
-            resultMap.put(lotto, rank);
-        }
-
-        return new LottoResult(resultMap, purchaseAmount);
-    }
 }

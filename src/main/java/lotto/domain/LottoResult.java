@@ -2,7 +2,9 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoResult {
     private final Map<Lotto, Rank> results;
@@ -43,6 +45,12 @@ public class LottoResult {
 
     public Map<Rank, Integer> getRankCounts() {
         return rankCounts;
+    }
+
+    public static LottoResult of(List<Lotto> lottos, WinningLotto winning, PurchaseAmount amount) {
+        Map<Lotto, Rank> map = lottos.stream()
+                .collect(Collectors.toMap(l -> l, winning::judge));
+        return new LottoResult(map, amount);
     }
 
 }
