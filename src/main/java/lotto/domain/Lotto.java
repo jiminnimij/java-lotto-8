@@ -21,6 +21,10 @@ public class Lotto {
                 .toList();
     }
 
+    public boolean contains(int number) {
+        return numbers.contains(new LottoNumber(number));
+    }
+
     private void validate(List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(ErrorCode.INVALID_LOTTO_COUNT.getMessage());
