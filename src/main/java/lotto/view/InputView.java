@@ -12,6 +12,7 @@ public class InputView {
     public int readPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
         String input = Console.readLine();
+        validateInput(input);
 
         return parseInteger(input);
     }
@@ -19,6 +20,7 @@ public class InputView {
     public List<Integer> readWinningNumbers() {
         System.out.println("당첨 번호를 입력해 주세요.");
         String input = Console.readLine();
+        validateInput(input);
 
         return splitNumbers(input);
     }
@@ -26,22 +28,30 @@ public class InputView {
     public int readBonusNumber() {
         System.out.println("보너스 번호를 입력해 주세요.");
         String input = Console.readLine();
+        validateInput(input);
 
         return parseInteger(input);
     }
 
-    public List<Integer> splitNumbers(String input) {
+    private List<Integer> splitNumbers(String input) {
         String[] winningNumbers = input.split(DELIMITER);
 
         return Arrays.stream(winningNumbers).map(this::parseInteger).toList();
     }
 
-    public int parseInteger(String input) {
+    private int parseInteger(String input) {
         try {
-            input = input.trim();
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ErrorCode.INVALID_NUMBER.getMessage());
+        }
+    }
+
+    private void validateInput(String input) {
+        try {
+            input = input.trim();
+        } catch (NullPointerException e) {
+            throw new IllegalArgumentException(ErrorCode.NULL_INPUT.getMessage());
         }
     }
 

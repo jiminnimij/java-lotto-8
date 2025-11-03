@@ -1,7 +1,8 @@
 package lotto.exception;
 
 public enum ErrorCode {
-    INVALID_NUMBER("숫자를 입력해야 합니다.");
+    INVALID_NUMBER("숫자를 입력해야 합니다."),
+    NULL_INPUT("입력이 null일 수 없습니다.");
 
     private static final String PREFIX = "[ERROR] ";
     private final String message;
