@@ -32,7 +32,7 @@ public class Lotto {
 
     private void validateDuplicate(List<Integer> numbers) {
         HashSet<Integer> set = new HashSet<>(numbers);
-        if (set.size() != 6) {
+        if (set.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(ErrorCode.DUPLICATE_NUMBER.getMessage());
         }
     }
