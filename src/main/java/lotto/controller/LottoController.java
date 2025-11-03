@@ -27,7 +27,7 @@ public class LottoController {
         WinningLotto winningLotto = askWinningLotto();
 
         LottoResult lottoResult = calculateResults(purchaseAmount, lottos, winningLotto);
-
+        outputView.printResults(lottoResult);
     }
 
     private PurchaseAmount askAmount() {
