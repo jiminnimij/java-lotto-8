@@ -8,7 +8,7 @@ public class LottoNumber implements Comparable<LottoNumber>{
     public static final int MIN_NUMBER = 1;
     public static final int MAX_NUMBER = 45;
 
-    private int number;
+    private final int number;
 
     public LottoNumber(int number) {
         validate(number);
@@ -31,11 +31,10 @@ public class LottoNumber implements Comparable<LottoNumber>{
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof LottoNumber)) return false;
-        LottoNumber other = (LottoNumber) obj;
-        return this.number == other.number;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof LottoNumber lottoNumber)) return false;
+        return this.number == lottoNumber.number;
     }
 
     @Override
