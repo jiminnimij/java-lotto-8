@@ -13,13 +13,8 @@ public class WinningLotto {
     }
 
     public Rank judge(Lotto lotto) {
-        long matchCount = winningLotto.getNumbers().stream()
-                .map(LottoNumber::getNumber)
-                .filter(lotto::contains)
-                .count();
-
+        int matchCount = lotto.matchCountWith(winningLotto);
         boolean bonusMatch = lotto.contains(bonusNumber.getNumber());
-
         return Rank.of(matchCount, bonusMatch);
     }
 

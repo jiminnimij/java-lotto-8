@@ -23,6 +23,12 @@ public class Lotto {
         return numbers.contains(new LottoNumber(number));
     }
 
+    public int matchCountWith(Lotto winningLotto) {
+        return (int) numbers.stream()
+                .filter(num -> winningLotto.contains(num.getNumber()))
+                .count();
+    }
+
     private void validate(List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(ErrorCode.INVALID_LOTTO_COUNT.getMessage());
@@ -40,4 +46,5 @@ public class Lotto {
     public List<LottoNumber> getNumbers() {
         return numbers;
     }
+
 }
