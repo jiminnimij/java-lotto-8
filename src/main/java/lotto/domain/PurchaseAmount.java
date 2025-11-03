@@ -3,6 +3,8 @@ package lotto.domain;
 import lotto.exception.ErrorCode;
 
 public class PurchaseAmount {
+    public static final int PRICE = 1000;
+
     private final int amount;
 
     public PurchaseAmount(int amount) {
@@ -22,7 +24,7 @@ public class PurchaseAmount {
     }
 
     private void validateMultipleOfThousand(int amount) {
-        if( amount % 1000 != 0 ) {
+        if( amount % PRICE != 0 ) {
             throw new IllegalArgumentException(ErrorCode.INVALID_AMOUNT.getMessage());
         }
     }
