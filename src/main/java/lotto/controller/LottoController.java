@@ -32,7 +32,7 @@ public class LottoController {
 
     private PurchaseAmount askAmount() {
         outputView.promptAmount();
-        int amount = inputView.readWithRetry(inputView::readPurchaseAmount, outputView::printError);
+        int amount = inputView.readWithRetry(inputView::readNumber, outputView::printError);
         return new PurchaseAmount(amount);
     }
 
@@ -45,13 +45,13 @@ public class LottoController {
 
     private Lotto askWinningNumbers() {
         outputView.promptWinningNumbers();
-        List<Integer> winningNumbers = inputView.readWithRetry(inputView::readWinningNumbers, outputView::printError);
+        List<Integer> winningNumbers = inputView.readWithRetry(inputView::readNumbers, outputView::printError);
         return new Lotto(winningNumbers);
     }
 
     private LottoNumber askBonusNumber() {
         outputView.promptBonusNumber();
-        int bonusNumber = inputView.readWithRetry(inputView::readBonusNumber, outputView::printError);
+        int bonusNumber = inputView.readWithRetry(inputView::readNumber, outputView::printError);
         return new LottoNumber(bonusNumber);
     }
 

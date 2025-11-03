@@ -6,32 +6,18 @@ import lotto.exception.ErrorCode;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class InputView {
     private static final String DELIMITER = ",";
 
-
-
-    public int readPurchaseAmount() {
-        String input = Console.readLine();
-        validateInput(input);
-
-        return parseInteger(input);
+    public int readNumber() {
+        return readValidatedInput(this::parseInteger);
     }
 
-    public List<Integer> readWinningNumbers() {
-        String input = Console.readLine();
-        validateInput(input);
-
-        return splitNumbers(input);
-    }
-
-    public int readBonusNumber() {
-        String input = Console.readLine();
-        validateInput(input);
-
-        return parseInteger(input);
+    public List<Integer> readNumbers() {
+        return readValidatedInput(this::splitNumbers);
     }
 
     public <T> T readWithRetry(Supplier<T> reader, Consumer<String> onError) {
@@ -39,6 +25,12 @@ public class InputView {
             try { return reader.get(); }
             catch (IllegalArgumentException e) { onError.accept(e.getMessage()); }
         }
+    }
+
+    private <T> T readValidatedInput(Function<String, T> parser) {
+        String input = Console.readLine();
+        String trimmedInput = validateInput(input);
+        return parser.apply(trimmedInput);
     }
 
     private List<Integer> splitNumbers(String input) {
@@ -55,9 +47,9 @@ public class InputView {
         }
     }
 
-    private void validateInput(String input) {
+    private String validateInput(String input) {
         try {
-            input = input.trim();
+            return input.trim();
         } catch (NullPointerException e) {
             throw new IllegalArgumentException(ErrorCode.NULL_INPUT.getMessage());
         }
