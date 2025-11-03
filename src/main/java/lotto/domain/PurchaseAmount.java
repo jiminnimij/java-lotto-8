@@ -12,6 +12,10 @@ public class PurchaseAmount {
         this.amount = amount;
     }
 
+    public int getCount() {
+        return amount / PRICE;
+    }
+
     private void validate(int amount) {
         validatePositiveInteger(amount);
         validateMultipleOfThousand(amount);
