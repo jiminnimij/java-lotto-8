@@ -35,17 +35,27 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        System.out.println("3개 일치 (" + money(resultPrize(Rank.FIFTH)) + ") - " + lottoResult.countByRank(Rank.FIFTH) + "개");
-        System.out.println("4개 일치 (" + money(resultPrize(Rank.FOURTH)) + ") - " + lottoResult.countByRank(Rank.FOURTH) + "개");
-        System.out.println("5개 일치 (" + money(resultPrize(Rank.THIRD)) + ") - " + lottoResult.countByRank(Rank.THIRD) + "개");
-        System.out.println("5개 일치, 보너스 볼 일치 (" + money(resultPrize(Rank.SECOND)) + ") - " + lottoResult.countByRank(Rank.SECOND) + "개");
-        System.out.println("6개 일치 (" + money(resultPrize(Rank.FIRST)) + ") - " + lottoResult.countByRank(Rank.FIRST) + "개");
+        for (Rank rank : Rank.values()) {
+            if (rank == Rank.MISS) continue;
+            System.out.println(formatRankLine(rank, lottoResult.countByRank(rank)));
+        }
 
         System.out.println("총 수익률은 " + String.format("%.1f", lottoResult.getProfitRate()) + "%입니다.");
     }
 
-    private long resultPrize(Rank rank) {
-        return rank.prize();
+    private String formatRankLine(Rank rank, long count) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(rank.getMatch()).append("개 일치");
+
+        if (rank.isNeedBonus()) {
+            sb.append(", 보너스 볼 일치");
+        }
+
+        sb.append(" (").append(money(rank.getPrize())).append(") - ")
+                .append(count).append("개");
+
+        return sb.toString();
     }
 
     private String money(long won) {

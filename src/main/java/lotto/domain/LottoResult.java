@@ -32,7 +32,7 @@ public class LottoResult {
 
     public long getTotalPrize() {
         return results.values().stream()
-                .mapToLong(Rank::prize)
+                .mapToLong(Rank::getPrize)
                 .sum();
     }
 

@@ -40,7 +40,7 @@ public class LottoResultTest {
         map.put(lottoOf(7,8,9,10,11,12), Rank.FIFTH);
         map.put(lottoOf(13,14,15,16,17,18), Rank.MISS);
 
-        long expected = Rank.FOURTH.prize() + Rank.FIFTH.prize() + Rank.MISS.prize();
+        long expected = Rank.FOURTH.getPrize() + Rank.FIFTH.getPrize() + Rank.MISS.getPrize();
 
         LottoResult result = new LottoResult(map, new PurchaseAmount(3000));
 
